@@ -1,3 +1,7 @@
+// ****** Important Points ******
+//=> While reversing a LL don't forget to put head=prev at last.
+//=> Don't forget to put head->next=NULL in reverse using recursion
+//=> Use call by value in reverseRecursion()
 #include<stdio.h>
 #include<stdlib.h>
 struct node{

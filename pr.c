@@ -1,202 +1,281 @@
-#include<stdio.h>
-#include<stdlib.h>
-// struct Node{
+// #include<stdio.h>
+// #include<stdlib.h>
+// // struct Node{
+// //     int data;
+// //     struct Node* next;
+// // };
+
+// // struct Node * createNode(int val){
+// //     struct Node*temp=(struct Node*)malloc(sizeof(struct Node));
+// //     temp->data=val;
+// //     temp->next=NULL;
+// //     return temp;
+// // }
+
+// // void insertAtBegin(struct Node**head,int val){
+// //     if(*head==NULL){
+// //         *head=createNode(val);
+// //         return;
+// //     }
+// //     struct Node* temp=*head;
+// //     temp->next=*head;
+// //     *head=temp;
+// // }
+
+// // struct Stack{
+// //     int *arr;
+// //     int top;
+// //     int cap;
+// // };
+
+// // struct Stack * initialize(int size){
+// //     struct Stack*temp=(struct Stack*)malloc(sizeof(struct Stack));
+// //     temp->top=-1;
+// //     temp->cap=size;
+// //     temp->arr=(int*)malloc(sizeof(int)*size);
+// //     return temp;
+// // }
+// // void push(struct Stack*st,int val){
+// //     if(st->top==(st->cap)-1){
+// //         printf("Stack Overflow");
+// //         return;
+// //     }
+// //     st->top++;
+// //     st->arr[st->top]=val;
+// // }
+// // void pop(struct Stack*st){
+// //     if(st->top==-1){
+// //         printf("Stack underflow\n");
+// //         return ;
+// //     }
+// //     printf("Value popped is %d\n",st->arr[st->top]);
+// //     st->top--;
+
+// // }
+// // struct Node{
+// //     int data;
+// //     struct Node*next;
+// // };
+
+// // void push(struct Node**top,int val){
+// //     // if(*top==NULL){
+// //     //     printf("Stack underflow");
+// //     //     return;
+// //     // }
+// //     struct Node*newNode=(struct Node*)malloc(sizeof(struct Node));
+// // newNode->data=val;
+// // newNode->next=*top;
+// // *top=newNode;
+// // }
+
+// // void pop(struct Node**top){
+// //     if(*top==NULL){
+// // printf("Stack UnderFlow");
+// // return;
+// //     }
+// //     struct Node*temp=*top;
+// //     *top=(*top)->next;
+// //     free(temp);
+// // }
+
+// // struct queue{
+// //     int *arr;
+// //     int start,end,cursize,cap;
+// // };
+
+// // struct queue* initialize(int size){
+// //     struct queue* temp=(struct queue*)malloc(sizeof(struct queue));
+// //     temp->arr=(int*)malloc(sizeof(int)*size);
+// //     temp->start=-1;
+// //     temp->end=-1;
+// //     temp->cursize=0;
+// //     temp->cap=size;
+// //     return temp;
+// // }
+
+// // struct queue* push(struct queue*q,int val){
+// // //     if(q->end==(q->cap)-1){
+// // //             q->end=((q->end)+1)%(q->cap);
+// // //             q->arr[q->end]=val;
+// // //             return q;
+// // //     }
+// // if(q->cursize==(q->cap)){
+// //     printf("Queue full");
+// //     return q;
+// // }
+// //     if(q->start==-1){
+// //     q->start=0;
+// // }
+// //     q->end++;
+// //     q->arr[q->end]=val;
+// //     q->cursize++;
+// //     return q;
+// // }
+
+
+// // void main(){
+// //     // struct Node*head=NULL;
+// //     // insertAtBegin(&head,55);
+// //     // printf("%d ",head->data);
+// // // struct Stack*s=initialize(100);;
+// // // push(s,66);
+// // // push(s,68);
+// // // push(s,65);
+// // // pop(s);
+// // // // pop(s);
+// // // while(s->top!=-1){
+// // // printf("%d ",s->arr[s->top]);
+// // // s->top--;
+// // // }
+// // // struct Node* top=NULL;
+// // // push(&top,999);
+// // // push(&top,998);
+// // // push(&top,997);
+// // // pop(&top);
+// // // struct Node* temp=top;
+// // // while(temp){
+// // // printf("%d ",temp->data);
+// // // temp=temp->next;
+// // // }
+
+// // struct queue*Q=initialize(100);
+// // Q=push(Q,999);
+// // printf("%d ",Q->arr[Q->end]);
+// // }
+
+
+// struct node{
 //     int data;
-//     struct Node* next;
+//     struct node*next;
 // };
 
-// struct Node * createNode(int val){
-//     struct Node*temp=(struct Node*)malloc(sizeof(struct Node));
+// struct node* createNode(int val){
+//     struct node* temp=(struct node*)malloc(sizeof(struct node));
 //     temp->data=val;
 //     temp->next=NULL;
 //     return temp;
 // }
 
-// void insertAtBegin(struct Node**head,int val){
+// void insertAtBegin(struct node**head,int val){
 //     if(*head==NULL){
 //         *head=createNode(val);
 //         return;
 //     }
-//     struct Node* temp=*head;
-//     temp->next=*head;
-//     *head=temp;
+//     struct node*newNode=createNode(val);
+//     newNode->next=*head;
+//     *head=newNode;
 // }
 
-// struct Stack{
-//     int *arr;
-//     int top;
-//     int cap;
-// };
-
-// struct Stack * initialize(int size){
-//     struct Stack*temp=(struct Stack*)malloc(sizeof(struct Stack));
-//     temp->top=-1;
-//     temp->cap=size;
-//     temp->arr=(int*)malloc(sizeof(int)*size);
-//     return temp;
+// struct node* reverse(struct node*head){
+//     if(head==NULL || head->next==NULL){
+//         return head;
+//     }
+//     struct node* newHead=reverse(head->next);
+//     struct node* front=head->next;
+//     front->next=head;
+//     head->next=NULL;
+//     return newHead;
 // }
-// void push(struct Stack*st,int val){
-//     if(st->top==(st->cap)-1){
-//         printf("Stack Overflow");
+
+// void printList(struct node** head){
+//     if(*head==NULL){
 //         return;
 //     }
-//     st->top++;
-//     st->arr[st->top]=val;
-// }
-// void pop(struct Stack*st){
-//     if(st->top==-1){
-//         printf("Stack underflow\n");
-//         return ;
+//     struct node* temp=*head;
+//     while(temp){
+//         printf("%d ",temp->data);
+//         temp=temp->next;
 //     }
-//     printf("Value popped is %d\n",st->arr[st->top]);
-//     st->top--;
-
-// }
-// struct Node{
-//     int data;
-//     struct Node*next;
-// };
-
-// void push(struct Node**top,int val){
-//     // if(*top==NULL){
-//     //     printf("Stack underflow");
-//     //     return;
-//     // }
-//     struct Node*newNode=(struct Node*)malloc(sizeof(struct Node));
-// newNode->data=val;
-// newNode->next=*top;
-// *top=newNode;
 // }
 
-// void pop(struct Node**top){
-//     if(*top==NULL){
-// printf("Stack UnderFlow");
-// return;
-//     }
-//     struct Node*temp=*top;
-//     *top=(*top)->next;
-//     free(temp);
+// int main(){
+//     struct node* head=NULL;
+//     insertAtBegin(&head,10);
+//     insertAtBegin(&head,20);
+//     insertAtBegin(&head,30);
+//     insertAtBegin(&head,40);
+//     printf("List before reversing: ");
+//     printList(&head);
+//     head=reverse(head);
+//     printf("\nList after reversing: ");
+//     printList(&head);
 // }
 
-// struct queue{
-//     int *arr;
-//     int start,end,cursize,cap;
-// };
+#include<stdio.h>
+#include<stdlib.h>
 
-// struct queue* initialize(int size){
-//     struct queue* temp=(struct queue*)malloc(sizeof(struct queue));
-//     temp->arr=(int*)malloc(sizeof(int)*size);
-//     temp->start=-1;
-//     temp->end=-1;
-//     temp->cursize=0;
-//     temp->cap=size;
-//     return temp;
-// }
-
-// struct queue* push(struct queue*q,int val){
-// //     if(q->end==(q->cap)-1){
-// //             q->end=((q->end)+1)%(q->cap);
-// //             q->arr[q->end]=val;
-// //             return q;
-// //     }
-// if(q->cursize==(q->cap)){
-//     printf("Queue full");
-//     return q;
-// }
-//     if(q->start==-1){
-//     q->start=0;
-// }
-//     q->end++;
-//     q->arr[q->end]=val;
-//     q->cursize++;
-//     return q;
-// }
-
-
-// void main(){
-//     // struct Node*head=NULL;
-//     // insertAtBegin(&head,55);
-//     // printf("%d ",head->data);
-// // struct Stack*s=initialize(100);;
-// // push(s,66);
-// // push(s,68);
-// // push(s,65);
-// // pop(s);
-// // // pop(s);
-// // while(s->top!=-1){
-// // printf("%d ",s->arr[s->top]);
-// // s->top--;
-// // }
-// // struct Node* top=NULL;
-// // push(&top,999);
-// // push(&top,998);
-// // push(&top,997);
-// // pop(&top);
-// // struct Node* temp=top;
-// // while(temp){
-// // printf("%d ",temp->data);
-// // temp=temp->next;
-// // }
-
-// struct queue*Q=initialize(100);
-// Q=push(Q,999);
-// printf("%d ",Q->arr[Q->end]);
-// }
-
-
-struct node{
-    int data;
-    struct node*next;
+struct queue{
+    int* arr;
+    int cap,front,rear;
 };
 
-struct node* createNode(int val){
-    struct node* temp=(struct node*)malloc(sizeof(struct node));
-    temp->data=val;
-    temp->next=NULL;
-    return temp;
+struct queue* initialize(int val){
+    struct queue* q=(struct queue*)malloc(sizeof(struct queue));
+    q->arr=(int*)malloc(sizeof(int)*val);
+    q->front=q->rear=-1;
+    // q->size=0;
+    q->cap=val;
+    return q;
 }
 
-void insertAtBegin(struct node**head,int val){
-    if(*head==NULL){
-        *head=createNode(val);
+void enqueue(struct queue*q,int val){
+    if((q->rear+1)%q->cap==q->front){
         return;
     }
-    struct node*newNode=createNode(val);
-    newNode->next=*head;
-    *head=newNode;
-}
-
-struct node* reverse(struct node*head){
-    if(head==NULL || head->next==NULL){
-        return head;
+    if(q->front==-1){
+        q->front=0;
     }
-    struct node* newHead=reverse(head->next);
-    struct node* front=head->next;
-    front->next=head;
-    head->next=NULL;
-    return newHead;
+    q->rear=(q->rear+1)%q->cap;
+    q->arr[q->rear]=val;
+    // q->size++;
 }
 
-void printList(struct node** head){
-    if(*head==NULL){
+void dequeue(struct queue*q){
+    if(q->front==-1){
+        // q->front=q->rear=-1;
         return;
     }
-    struct node* temp=*head;
-    while(temp){
-        printf("%d ",temp->data);
-        temp=temp->next;
+    if(q->front==q->rear){
+        q->front=q->rear=-1;
+    }else{
+    q->front=(q->front+1)%q->cap;
+    }// q->size--;
+}
+
+int peek(struct queue*q){
+    if(q->front==-1){
+        return -1;
     }
+    return q->arr[q->front];
+}
+
+void printQueue(struct queue*q){
+    if(q->front==-1){
+        return;
+    }
+    int i=q->front;
+    while(1){
+        printf("%d ",q->arr[i]);
+        if(i==q->rear) break;
+        i=(i+1)%q->cap;
+    }
+    // printf("%d ",q->arr[q->rear]);
 }
 
 int main(){
-    struct node* head=NULL;
-    insertAtBegin(&head,10);
-    insertAtBegin(&head,20);
-    insertAtBegin(&head,30);
-    insertAtBegin(&head,40);
-    printf("List before reversing: ");
-    printList(&head);
-    head=reverse(head);
-    printf("\nList after reversing: ");
-    printList(&head);
+    struct queue* q=initialize(5);
+    enqueue(q,1);
+    enqueue(q,2);
+    enqueue(q,3);
+    enqueue(q,4);
+    enqueue(q,5);
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    enqueue(q,999);
+    enqueue(q,888);
+    printQueue(q);
+    printf("\nFirst element is %d",peek(q));
 }
