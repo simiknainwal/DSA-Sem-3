@@ -5,25 +5,18 @@ struct node{
     int data;
     struct node* next;
 };
-
 struct stack{
     struct node* top;
 };
 
-struct stack* initialize(){
-struct stack* st=(struct stack*)malloc(sizeof(struct  stack));
-st->top=NULL;
-return st;
-}
-
 struct node* createNode(int val){
     struct node* newNode=(struct node*)malloc(sizeof(struct node));
-        newNode->data=val;
-        newNode->next=NULL;
-        return newNode;
+    newNode->data=val;
+    newNode->next=NULL;
+    return newNode;
 }
 
-void push(struct stack* st,int val){
+void push(struct stack*st,int val){
     if(st->top==NULL){
         st->top=createNode(val);
         return;
@@ -33,7 +26,7 @@ void push(struct stack* st,int val){
     st->top=newNode;
 }
 
-void pop(struct stack* st){
+void pop(struct stack*st){
     if(st->top==NULL){
         return;
     }
@@ -42,7 +35,7 @@ void pop(struct stack* st){
     free(temp);
 }
 
-void printStack(struct stack* st){
+void display(struct stack*st){
     if(st->top==NULL){
         return;
     }
@@ -54,11 +47,13 @@ void printStack(struct stack* st){
 }
 
 int main(){
-    struct stack* st=initialize();
+    struct stack* st=(struct stack*)malloc(sizeof(struct stack));
+    st->top=NULL;
     push(st,1);
+    push(st,2);
     push(st,3);
     push(st,4);
     push(st,5);
     pop(st);
-    printStack(st);
+    display(st);
 }

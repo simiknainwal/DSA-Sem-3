@@ -17,10 +17,10 @@ struct Node *createNode(int val){
 
 void insertAtBegin(struct Node **head, int val){
     if(*head==NULL){
-        *head= createNode(5);
+        *head= createNode(val);
         return;
     }
-    struct Node* temp=createNode(5);
+    struct Node* temp=createNode(val);
     temp->next=*head;
     *head=temp;
     return;
@@ -136,6 +136,31 @@ temp2=temp;
 temp=temp->next;
 }
 }
+
+void deleteAtMultipleOfK(struct Node**head, int k){
+    if(*head==NULL){
+        return;
+    }int c=0,i=0;
+    printf("Enter value of K:");
+    scanf("%d",&k);
+    struct Node* temp=*head;
+    struct Node* temp2=*head;
+    // while(temp){
+    //     c++;
+    //     temp=temp->next;
+    // }
+    while(temp && temp->next){
+        if(k%i==0){
+            struct Node* t=temp;
+            temp2->next=temp->next;
+            free(t);
+        }
+        temp2=temp->next;
+        temp=temp->next->next;
+i++;
+    }
+}
+
 void printList(struct Node**head){
     struct Node* temp=*head;
     if(*head==NULL){
@@ -152,25 +177,30 @@ void printList(struct Node**head){
 int main(){
     int c=1;
     struct Node *head=NULL;
-    // insertAtBegin(&head,5);
+    insertAtBegin(&head,5);
+    insertAtBegin(&head,4);
+    insertAtBegin(&head,3);
+    insertAtBegin(&head,2);
+    insertAtBegin(&head,1);
+    deleteAtMultipleOfK(&head,2);
     // insertAtEnd(&head,78);
-    // // deleteFromBegin(&head);
+    // deleteFromBegin(&head);
     // insertAfterK(&head,5,999);
     // insertBeforeK(&head,99,888);
     // DeleteK(&head,888);
-    // printList(&head);
-    while(c){
-        int ch;
-        printf("Enter choice:");
-        scanf("%d",&ch);
-        switch(ch){
-            case 1:insertAtBegin(&head,2);  
-                            break;
-            case 2:printList(&head);
-            break;                
-            case 3:printf("End\n");c=0;
-            break;                
-        }
-    }
+    // // printList(&head);
+    // while(c){
+    //     int ch;
+    //     printf("Enter choice:");
+    //     scanf("%d",&ch);
+    //     switch(ch){
+    //         case 1:insertAtBegin(&head,2);  
+    //                         break;
+    //         case 2:printList(&head);
+    //         break;                
+    //         case 3:printf("End\n");c=0;
+    //         break;                
+    //     }
+    // }
     printList(&head);
 }

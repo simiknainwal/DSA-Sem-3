@@ -7,14 +7,8 @@ struct node{
 };
 
 struct queue{
-    struct node* front,*rear;
+    struct node* front,* rear;
 };
-
-struct queue* initialize(){
-struct queue* q=(struct queue*)malloc(sizeof(struct queue));
-q->rear=q->front=NULL;
-return q;
-}
 
 struct node* createNode(int val){
     struct node* newNode=(struct node*)malloc(sizeof(struct node));
@@ -24,17 +18,29 @@ struct node* createNode(int val){
 }
 
 void enqueue(struct queue* q,int val){
-    if(q->rear==NULL){
+    if(q->front==NULL){
         q->front=q->rear=createNode(val);
         return;
     }
-    struct node* newNode=createNode(val);
-    q->rear->next=newNode;
-    q->rear=newNode;
+    struct node* temp=createNode(val);
+    q->rear->next=temp;
+    q->rear=temp;
 }
 
-void printQueue(struct queue* q){
-    if(q->rear==NULL){
+void dequeue(struct queue* q){
+    if(q->front==NULL){
+        return;
+    }
+    struct node* temp=q->front;
+    q->front=q->front->next;
+    if(q->front==NULL){
+        q->rear=NULL;
+    }
+    free(temp);
+}
+
+void display(struct queue* q){
+    if(q->front==NULL){
         return;
     }
     struct node* temp=q->front;
@@ -45,11 +51,13 @@ void printQueue(struct queue* q){
 }
 
 int main(){
-    struct queue* q=initialize();
+    struct queue* q=(struct queue*)malloc(sizeof(struct queue));
+    q->front=q->rear=NULL;
     enqueue(q,1);
     enqueue(q,2);
     enqueue(q,3);
     enqueue(q,4);
     enqueue(q,5);
-    printQueue(q);
+    dequeue(q);
+    display(q);
 }
