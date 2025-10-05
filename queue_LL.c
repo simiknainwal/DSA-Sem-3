@@ -33,6 +33,18 @@ void enqueue(struct queue* q,int val){
     q->rear=newNode;
 }
 
+void dequeue(struct queue*q){
+    if(q->rear==NULL){
+        return;
+    }
+    struct node* temp=q->front;
+    q->front=q->front->next;
+    if(q->front==NULL){
+        q->rear=NULL;
+    }
+    free(temp);
+}
+
 void printQueue(struct queue* q){
     if(q->rear==NULL){
         return;
@@ -51,5 +63,12 @@ int main(){
     enqueue(q,3);
     enqueue(q,4);
     enqueue(q,5);
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    enqueue(q,999);
+    // enqueue(q,999);
     printQueue(q);
 }

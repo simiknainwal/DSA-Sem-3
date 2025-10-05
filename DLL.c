@@ -11,6 +11,7 @@ struct node* createNode(int val){
     struct node*newNode=(struct node*)malloc(sizeof(struct node));
     newNode->prev=newNode->next=NULL;
     newNode->data=val;
+    return newNode;
 }
 
 void insertAtBegin(struct node**head,int val){
@@ -20,6 +21,7 @@ void insertAtBegin(struct node**head,int val){
     }
     struct node* newNode=createNode(val);
     newNode->next=(*head);
+    (*head)->prev=newNode;
     *head=newNode;
 }
 void insertAtEnd(struct node**head,int val){
@@ -46,7 +48,9 @@ void insertAtK(struct node**head,int val,int k){
 struct node* newNode=createNode(val);
 struct node* temp=*head;
 k=k-1;
-while(k--){
+while(temp){
+    k--;
+    if(k==0)break;
     temp=temp->next;
 }
 newNode->next=temp->next;
@@ -60,6 +64,7 @@ void deleteAtBegin(struct node**head){
     }
     struct node* temp=*head;
     *head=(*head)->next;
+    (*head)->prev=NULL;
     free(temp);
 }
 
@@ -68,7 +73,7 @@ void deleteAtEnd(struct node**head){
         return;
     }
     if((*head)->next==NULL){
-        *head=NULL;
+        free(*head);
     }
     struct node* temp=*head;
     while(temp->next->next){
@@ -96,7 +101,7 @@ int main(){
     insertAtBegin(&head,4);
     insertAtEnd(&head,5);
     insertAtK(&head,999,2);
+    printList(&head);
     deleteAtBegin(&head);
     deleteAtEnd(&head);
-    printList(&head);
 }

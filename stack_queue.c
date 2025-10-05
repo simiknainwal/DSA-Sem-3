@@ -97,6 +97,13 @@ int top(struct stack* st){
     return st->q1->arr[st->q1->front];
 }
 
+void printStack(struct stack* st){
+    if(isEmpty(st->q1)){
+        return;
+    }
+    printQueue(st->q1);
+}
+
 int main(){
     struct stack* st=createStack(100);
     push(st,1);
@@ -104,13 +111,11 @@ int main(){
     push(st,3);
     push(st,4);
     push(st,5);
-    printf("%d ",top(st));
     pop(st);
-    printf("%d ",top(st));
     pop(st);
-    printf("%d ",top(st));
     pop(st);
-    printf("%d ",top(st));
     pop(st);
-    printf("%d ",top(st));
+    pop(st);
+    push(st,999);
+    printStack(st);
 }

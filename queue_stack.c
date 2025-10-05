@@ -89,6 +89,17 @@ int front(struct queue* q){
     return q->s1->arr[q->s1->top];
 }
 
+void printQueue(struct queue* q){
+    if(isEmpty(q->s1)){
+        return;
+    }
+    // printStack(q->s1);
+    // int i=q->s1->top;
+    for(int i=q->s1->top;i>=0;i--){
+        printf("%d ",q->s1->arr[i]);
+    }
+}
+
 int main(){
     struct queue*q=initializeQueue(100);
     enqueue(q,10);
@@ -108,13 +119,14 @@ int main(){
     // dequeue(q);
     enqueue(q,999);
     enqueue(q,998);
-    dequeue(q);
-    dequeue(q);
-    dequeue(q);
-    dequeue(q);
-    dequeue(q);
-    dequeue(q);
-    dequeue(q);
-    printf("%d ",front(q));
+    // dequeue(q);
+    // dequeue(q);
+    // dequeue(q);
+    // dequeue(q);
+    // dequeue(q);
+    // dequeue(q);
+    // dequeue(q);
+    printQueue(q);
+    // printf("%d ",front(q));
 }
 

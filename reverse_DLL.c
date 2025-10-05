@@ -44,6 +44,37 @@ struct node* reverse(struct node* head){
     return last;
 }
 
+struct node* oddeven(struct node*head){
+    if(head==NULL){
+        return head;
+    }
+    struct node* head2=head->next;
+    struct node* prv1=NULL;
+    struct node* prv2=NULL;
+    struct node* t2=head->next;
+    struct node* t1=head;
+    while(t2 && t2->next){
+        t1->next=t2->next;
+        t1->prev=prv1;
+        prv1=t1;
+        t1=t1->next;
+        t2->next=t1->next;
+        t2->prev=prv2;
+        prv2=t2;
+        t2=t2->next;
+    }
+    t1->next=head2;
+    head2->prev=t1;
+    return head;
+}
+
+struct node* evenodd(struct node*head){
+    if(head==NULL){
+        return head;
+    }
+    // struct node* 
+}
+
 void display(struct node* head){
     if(head==NULL){
         return;
@@ -56,17 +87,17 @@ void display(struct node* head){
     printf("\n");
 }
 
-
 int main(){
     struct node* head=NULL;
-    head=insertAtEnd(head,1);
-    head=insertAtEnd(head,2);
-    head=insertAtEnd(head,3);
-    head=insertAtEnd(head,4);
-    head=insertAtEnd(head,5);
-    display(head);
-    printf("\n");
-    head=reverse(head);
+    head=insertAtEnd(head,13);
+    head=insertAtEnd(head,25);
+    head=insertAtEnd(head,34);
+    head=insertAtEnd(head,49);
+    head=insertAtEnd(head,51);
+    // display(head);
+    // printf("\n");
+    // head=reverse(head);
+    head=oddeven(head);
     display(head);
     return 0;
 }
