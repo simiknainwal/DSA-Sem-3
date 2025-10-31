@@ -53,6 +53,24 @@ int dequeue(struct queue* q){
     return val; 
 }
 
+void bfs(int start,int end,int n,int adjm[][7]){
+    struct queue*q=initialize(100);
+    int visited[50]={0};
+    visited[start]=1;
+    printf("%d ",start);
+    enqueue(q,start);
+    while(!isEmpty(q)){
+        int node=dequeue(q);
+        for(int j=0;j<n;j++){
+            if(adjm[node][j]==1 && visited[j]==0){
+                printf("%d ",j);
+                visited[j]=1;
+                enqueue(q,j);
+            }
+        }
+    }
+}
+
 void printQueue(struct queue* q){
     if(isEmpty(q)){
         return;
@@ -84,9 +102,33 @@ int main(){
 
     //BFS implementation
 
-int u,i=0,visited[7]={0};
-//Adjacency Matrix=>representing a graph
-int a[7][7]={
+// int u,i=0,visited[7]={0};
+// //Adjacency Matrix=>representing a graph
+// int a[7][7]={
+//     {0,1,1,1,0,0,0},
+//     {1,0,1,0,0,0,0},
+//     {1,1,0,1,1,0,0},
+//     {1,0,1,0,1,0,0},
+//     {0,0,1,1,0,1,1},
+//     {0,0,0,0,1,0,0},
+//     {0,0,0,0,1,0,0}
+// };
+// printf("%d ",i);
+// visited[i]=1;
+// enqueue(q,i); // For exploration
+// while(!isEmpty(q)){
+
+//     int node=dequeue(q);
+//     for(int j=0;j<7;j++){
+//         if(a[node][j]==1 && visited[j]==0){
+//             printf("%d ",j);
+//             visited[j]=1;
+//             enqueue(q,j);
+//         }
+//     }
+// }
+
+int adjm[7][7]={
     {0,1,1,1,0,0,0},
     {1,0,1,0,0,0,0},
     {1,1,0,1,1,0,0},
@@ -95,19 +137,6 @@ int a[7][7]={
     {0,0,0,0,1,0,0},
     {0,0,0,0,1,0,0}
 };
-printf("%d ",i);
-visited[i]=1;
-enqueue(q,i); // For exploration
-while(!isEmpty(q)){
-
-    int node=dequeue(q);
-    for(int j=0;j<7;j++){
-        if(a[node][j]==1 && visited[j]==0){
-            printf("%d ",j);
-            visited[j]=1;
-            enqueue(q,j);
-        }
-    }
-}
+bfs(0,6,7,adjm);
 // printQueue(q);
 } 
