@@ -1,3 +1,8 @@
+//Selection sort=> In this we will se first element and check for minimum element at its right and swap the elements and next we check for minimum element after that index at right.
+
+//Has less number of swap operations than bubble but time complexity is not same in all cases.
+//Time complexity:
+// O(n^2) for all cases.
 #include<stdio.h>
 int main(){
     int a[]={5,4,3,2,1};
