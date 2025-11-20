@@ -21,7 +21,7 @@ struct node* createNode(int vertex){
 struct graph* createGraph(int v){
     struct graph* g=(struct graph*)malloc(sizeof(struct graph));
     g->nv=v;
-    g->al=(struct graph**)malloc(sizeof(struct graph*)*v);
+    g->al=(struct node**)malloc(sizeof(struct node*)*v);
     for(int i=0;i<g->nv;i++){
         g->al[i]=NULL;
     }
