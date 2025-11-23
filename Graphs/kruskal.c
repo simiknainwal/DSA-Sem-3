@@ -7,6 +7,12 @@ int* parent;
 int* size;
 };
 
+struct edge{
+    int u;
+    int v;
+    int wt;
+};
+
 struct disjoint* initialize(int n){
     struct disjoint* t=(struct disjoint*)malloc(sizeof(struct disjoint));
     
@@ -67,26 +73,52 @@ void unionSize(int u,int v,struct disjoint* d){
 
 }
 
+void sort(struct edge Edge[],int E){
+for(int i=0;i<E;i++){
+    for(int j=0;j<(E-1-i);j++){
+        if(Edge[j].wt>Edge[j+1].wt){
+            struct edge t=Edge[j];
+            Edge[j]=Edge[j+1];
+            Edge[j+1]=t;
+        }
+    }
+}
+}
+
+void MST(struct edge Edge[], int E, int N){
+    struct disjoint* d=initialize(N);
+    int minwt=0;
+    sort(Edge,E);
+    
+    for(int i=0;i<E;i++){
+        int u=Edge[i].u;
+        int v=Edge[i].v;
+        int wt=Edge[i].wt;
+        
+        if(findParent(u,d)!=findParent(v,d)){
+            printf("%d---%d\n",u,v);
+            minwt+=wt;
+            unionSize(u,v,d);
+        }
+    }
+    printf("Minimum weight is %d",minwt);
+
+
+}
+
 int main(){
-struct disjoint* d=initialize(7);
+struct edge edges[] = {
+        {1, 2, 5},
+        {2, 3, 3},
+        {1, 3, 10},
+        {4, 5, 4},
+        {5, 6, 1},
+        {6, 7, 2},
+        {3, 7, 8},
+        {2, 6, 6}
+    };
+int E=sizeof(edges)/sizeof(edges[0]);
+    MST(edges,E,7);
 
-unionSize(1,2,d);
-unionSize(2,3,d);
-unionSize(4,5,d);
-unionSize(6,7,d);
-unionSize(5,6,d);
-
-if(findParent(3,d)==findParent(7,d)){
-    printf("Same\n");
-}else{
-printf("Different:%d\n",findParent(3,d));
-}
-
-unionSize(3,7,d);
-if(findParent(3,d)==findParent(7,d)){
-    printf("Same:%d\n",findParent(3,d));
-}else{
-printf("Different\n"); 
-}
 }
 
