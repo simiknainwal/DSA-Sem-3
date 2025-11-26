@@ -59,8 +59,9 @@ int countLeft(struct tree_type *root)
     int count = 0;
     if (root->left != NULL)
     {
-        count = 1;
+        count += 1; 
     }
+    // return count + countLeft(root->left) + countLeft(root->right);
     return count + countLeft(root->left) + countLeft(root->right);
 }
 

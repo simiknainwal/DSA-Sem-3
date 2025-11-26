@@ -85,10 +85,52 @@ for(int i=0;i<E;i++){
 }
 }
 
+//Maintaining the property of min-heap at every swap.
+void heapify(struct edge heap[],int i,int n){
+    int smallest=i;
+    int left=2*i+1;
+    int right=2*i+2;
+    if(left<n && heap[left].wt<heap[smallest].wt){
+        smallest=left;
+    }
+    if(right<n && heap[right].wt<heap[smallest].wt){
+        smallest=right;
+    }
+    if(smallest!=i){
+        struct edge t=heap[smallest];
+        heap[smallest]=heap[i];
+        heap[i]=t;
+        heapify(heap,smallest,n);
+    }
+}
+
+//Transforming the unordered array into complete binary tree.
+void buildheap(struct edge heap[],int n){
+    for(int i=n/2-1;i>=0;i--){
+        heapify(heap,i,n);
+    }
+}
+
+void heapsort(struct edge heap[],int n){
+    buildheap(heap,n);
+    for(int i=n-1;i>0;i--){
+        struct edge t=heap[0];
+        heap[0]=heap[i];
+        heap[i]=t;
+        heapify(heap,0,i);
+    }
+
+    for(int i=0; i<n/2; i++){
+        struct edge temp = heap[i];
+        heap[i] = heap[n-1-i];
+        heap[n-1-i] = temp;
+    }
+}
+
 void MST(struct edge Edge[], int E, int N){
     struct disjoint* d=initialize(N);
     int minwt=0;
-    sort(Edge,E);
+    heapsort(Edge,E);
     
     for(int i=0;i<E;i++){
         int u=Edge[i].u;
