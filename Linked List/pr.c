@@ -76,6 +76,37 @@ struct node* oddeven(struct node*head){
     return head;
 }
 
+struct node* reorder(struct node*head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    struct node* slow=head;
+    struct node* fast=head;
+    struct node* prev=head;
+    struct node* temp=head;
+    while(fast && fast->next){
+        prev=slow;
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    if(fast){
+        prev=slow;
+        slow=slow->next;
+    }
+    prev->next=NULL;
+    struct node* head2=reverse(slow);
+    
+    while(temp && head2){
+    struct node* n1=temp->next;
+    struct node* n2=head2->next;
+    temp->next=head2;
+    head2->next=n1;
+    temp=n1;
+    head2=n2;
+    }
+    return head;
+}
+
 void display(struct node*head){
     if(head==NULL){
         return;
@@ -96,11 +127,13 @@ int main(){
     head=insertAtEnd(head,30);
     head=insertAtEnd(head,40);
     head=insertAtEnd(head,50);
+    // head=insertAtEnd(head,60);
     display(head);
     printf("\nMiddle element is %d\n",middle(head)->data);
     // struct node* nhead=reverse(head);
     // display(nhead);
     printf("\n");
-    struct node* head2=oddeven(head);
+    // struct node* head2=oddeven(head);
+    struct node* head2=reorder(head);
     display(head2);
 }
