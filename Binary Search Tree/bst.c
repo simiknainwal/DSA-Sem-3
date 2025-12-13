@@ -132,6 +132,44 @@ int countPairs(struct tree_type*root1,struct tree_type*root2,int key){
     return countPairsRec(root1,root2,key);
 }
 
+struct tree_type* inorderPre(struct tree_type* root){
+    root=root->left;
+    while(root->right!=NULL){
+        root=root->right;
+    }
+    return root;
+}
+
+struct tree_type* deleteNode(struct tree_type*root,int val){
+    if(root==NULL){
+        return NULL;
+    }
+    if(val<root->info){
+        root->left=deleteNode(root->left,val);
+    }else if(val>root->info){
+        root->right=deleteNode(root->right,val);
+    }else{
+        if(root->left==NULL && root->right==NULL){
+            free(root);
+            return NULL;
+        }
+        if(root->right && root->left==NULL){
+            struct tree_type* temp=root->right;
+            free(root);
+            return temp;
+        }
+        if(root->left && root->right==NULL){
+            struct tree_type* temp=root->left;
+            free(root);
+            return temp;
+        }
+        struct tree_type* ipr=inorderPre(root);
+        root->info=ipr->info;
+        root->left=deleteNode(root->left,ipr->info);
+    }
+            return root;
+    }
+
 void inorder(struct tree_type*root){
     if(root==NULL){
         return;
@@ -140,6 +178,8 @@ void inorder(struct tree_type*root){
     printf("%d ",root->info);
     inorder(root->right);
 }
+
+
 
 int main(){
     struct tree_type* root = NULL;
@@ -151,34 +191,34 @@ int main(){
     insert(&root,30);
     insert(&root,45);
     insert(&root,70);
-
-    insert(&root2,50);
-    insert(&root2,75);
-    insert(&root2,25);
-    insert(&root2,55);
-    insert(&root2,15);
-    insert(&root2,85);
+    deleteNode(root,60);
+    // insert(&root2,50);
+    // insert(&root2,75);
+    // insert(&root2,25);
+    // insert(&root2,55);
+    // insert(&root2,15);
+    // insert(&root2,85);
 
     printf("Inorder: ");
     inorder(root);
 
-    printf("\nHeight of BST is %d", height(root));
-    printf("\nMaximum info of BST is %d", high_info(root));
-    printf("\nLeft nodes of BST is %d", countLeft(root));
-    printf("\nRight nodes of BST is %d", countRight(root));
+    // printf("\nHeight of BST is %d", height(root));
+    // printf("\nMaximum info of BST is %d", high_info(root));
+    // printf("\nLeft nodes of BST is %d", countLeft(root));
+    // printf("\nRight nodes of BST is %d", countRight(root));
 
-    printf("\nEnter an element to be searched: ");
-    int key;
-    scanf("%d", &key);
+    // printf("\nEnter an element to be searched: ");
+    // int key;
+    // scanf("%d", &key);
 
-    printf("Found? %d", searchBST(root, key));
+    // printf("Found? %d", searchBST(root, key));
 
-    int sumKey;
-    printf("\nEnter sum key to count pairs: ");
-    scanf("%d", &sumKey);
+    // int sumKey;
+    // printf("\nEnter sum key to count pairs: ");
+    // scanf("%d", &sumKey);
 
-    printf("\nTotal pairs having sum %d are %d\n",
-           sumKey, countPairs(root, root2, sumKey));
+    // printf("\nTotal pairs having sum %d are %d\n",
+    //        sumKey, countPairs(root, root2, sumKey));
 
     return 0;
 }
