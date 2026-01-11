@@ -8,7 +8,7 @@ void merge(int* arr,int l,int mid,int r){
     for(int i=0;i<n1;i++){
         a1[i]=arr[l+i];
     }
-    for(int i=0;i<n1;i++){
+    for(int i=0;i<n2;i++){
         a2[i]=arr[mid+1+i];
     }
     int i=0,j=0,k=l;
